@@ -46,7 +46,7 @@ Este es el repositorio del grupo X, de la materia Ingenieria y Calidad de Softwa
   - **Bibliografia/** -> libros, artículos y papers.
   - **Diapositivas/** -> presentaciones de las clases.
 - **Trabajos_Practicos/**
-  - Consignas_tp.pdf
+  - ISW_Enunciados TP evaluables 2025.pdf
   - TP1/
   - TP2/
 
