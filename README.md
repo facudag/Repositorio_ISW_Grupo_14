@@ -74,11 +74,11 @@ Este es el repositorio del grupo X, de la materia Ingenieria y Calidad de Softwa
 | Ítem de Configuración       | Regla de Nombrado                          | Ubicación Física                   | Tipo de Ítem              |
 |-----------------------------|--------------------------------------------|------------------------------------|---------------------------|
 | README.md                   | `README.md`                                | `/`                                | Proyecto             |
-| Diapositivas                | `<nn>_<Nombre_Diapositiva>.<extensión>`    | `/Material_Teorico/Diapositivas/`  | Documentación       |
-| Bibliografia                | `<Tema>_<Nombre_Documento>.<extensión>`    | `/Material_Teorico/Bibliografia/`  | Documentación       |
-| Apuntes                     | `<Nombre_Apunte>.<extensión>`              | `/Material_Teorico/Apuntes/`       | Documentación       |
+| Diapositivas                | `<nn><Nombre_Diapositiva>.<extensión>`    | `/Material_Teorico/Diapositivas/`  | Documentación       |
+| Bibliografia                | `<Tema>_<Nombre Documento>.<extensión>`    | `/Material_Teorico/Bibliografia/`  | Documentación       |
+| Apuntes                     | `<Nombre Apunte>.<extensión>`              | `/Material_Teorico/Apuntes/`       | Documentación       |
 | ISW_Enunciados TP evaluables 2025 | `ISW_Enunciados TP evaluables 2025.pdf` | `/Trabajos_Practicos/`             | Proyecto       |
-| TP1                         | `TP1_<NombreArchivo>.<extensión>`          | `/Trabajos_Practicos/TP1/`         | Producto          |
+| TP1                         | `TP1 <NombreArchivo>.<extensión>`          | `/Trabajos_Practicos/TP1/`         | Producto          |
 
 
 ---
