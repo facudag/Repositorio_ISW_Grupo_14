@@ -5,6 +5,7 @@ Este es el repositorio del grupo X, de la materia Ingenieria y Calidad de Softwa
 
 - [Información General](#información-general)
 - [Integrantes del Grupo](#integrantes-del-grupo)
+- [Repositorio del Proyecto](#repositorio-del-proyecto)
 - [Estructura del Proyecto](#estructura-del-proyecto)
 - [Convenciones y Reglas de Nombrado](#convenciones-y-reglas-de-nombrado)
 - [Ítems de Configuración](#ítems-de-configuración)
@@ -19,7 +20,7 @@ Este es el repositorio del grupo X, de la materia Ingenieria y Calidad de Softwa
 **Profesoras:**
 - Titular: Ing. Judith Meles
 - Jefa de Trabajos Prácticos: Ing. Mickaela Crespo
--Ayudante Alumno: Salvador Barbera
+- Ayudante Alumno: Salvador Barbera
 
 ---
 ## Integrantes del Grupo
@@ -37,6 +38,10 @@ Este es el repositorio del grupo X, de la materia Ingenieria y Calidad de Softwa
 |Succar Agustín                  | 73540  |
 |Torres Gec Federico             | 85918  |
 
+---
+## Repositorio del Proyecto
+
+[Repositorio GitHub](https://github.com/facudag/Repositorio_ISW_Grupo_X.git)
 
 ---
 ## Estructura del Proyecto
@@ -49,14 +54,17 @@ Este es el repositorio del grupo X, de la materia Ingenieria y Calidad de Softwa
   - ISW_Enunciados TP evaluables 2025.pdf
   - TP1/
   - TP2/
+  - TP3/
+  - TP4/
+    - TP4 Salida.pdf
 
 
 ---
 ## Convenciones y Reglas de Nombrado
 
-- Los trabajos practicos se guardan en carpetas con el formato `TP<NroTP>` Ejemplo: 'TP1'
+- Los trabajos practicos se guardan en carpetas con el formato `TP<NumeroTP>` Ejemplo: 'TP1'
 - Dentro de las carpetas de Trabajos practicos encontraremos las salidas de los mismos, junto a los items de configuracion necesarios.
-- Los archivos dentro de las carpetas `TP<NroTp>` deben usar la convencion `<descripcion>.<extencion>`
+- Los archivos dentro de las carpetas `TP<NumeroTP>` deben usar la convencion `TP<NumeroTP><descripcion>.<extencion>`
 - Las diapositivas se deben guardar con el formato `<nn><nombre de la diapositiva>.<extencion>` ejemplo: 01 SCM.pdf
 - La bibliografia se debe guardar con el siguiente formato `<Tema>_<Nombre Documento>.extencion`
 
