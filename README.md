@@ -8,8 +8,10 @@ Este es el repositorio del grupo X, de la materia Ingenieria y Calidad de Softwa
 - [Repositorio del Proyecto](#repositorio-del-proyecto)
 - [Estructura del Proyecto](#estructura-del-proyecto)
 - [Convenciones y Reglas de Nombrado](#convenciones-y-reglas-de-nombrado)
+- [Glosario](#glosario)
 - [Ítems de Configuración](#ítems-de-configuración)
 - [Línea Base del Proyecto](#línea-base-del-proyecto)
+
 
 ---
 
@@ -66,7 +68,14 @@ Este es el repositorio del grupo X, de la materia Ingenieria y Calidad de Softwa
 - Dentro de las carpetas de Trabajos practicos encontraremos las salidas de los mismos, junto a los items de configuracion necesarios.
 - Los archivos dentro de las carpetas `TP<NumeroTP>` deben usar la convencion `TP<NumeroTP><descripcion>.<extencion>`
 - Las diapositivas se deben guardar con el formato `<nn><nombre de la diapositiva>.<extencion>` ejemplo: 01 SCM.pdf
-- La bibliografia se debe guardar con el siguiente formato `<Tema>_<Nombre Documento>.extencion`
+- La bibliografia se debe guardar con el siguiente formato `<Tema>_<Nombre Documento>.<extencion>`
+
+---
+
+## Glosario
+
+- `<nn>` Número correlativo de dos dígitos que indica el orden.
+  - Ejemplo: 00, 01, 02, ...
 
 ---
 ## Ítems de Configuración
