@@ -69,6 +69,7 @@ Este es el repositorio del grupo X, de la materia Ingenieria y Calidad de Softwa
 - Los archivos dentro de las carpetas `TP<NumeroTP>` deben usar la convencion `TP<NumeroTP><descripcion>.<extencion>`
 - Las diapositivas se deben guardar con el formato `<nn><nombre de la diapositiva>.<extencion>` ejemplo: 01 SCM.pdf
 - La bibliografia se debe guardar con el siguiente formato `<Tema>_<Nombre Documento>.<extencion>`
+- Los apuntes se deben guardar con el siguiente formato `<Fecha>_<Nombre Documento>.<extencion>`
 
 ---
 
