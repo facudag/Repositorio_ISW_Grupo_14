@@ -1,4 +1,4 @@
-# Repositorio_ISW_Grupo_X
+# Repositorio_ISW_Grupo_14
 Este es el repositorio del grupo X, de la materia Ingenieria y Calidad de Software, UTN FRC. Esta creado con el fin de aplicar los conceptos de gestión de configuración estudiados.
 
 ## Tabla de Contenidos
@@ -77,6 +77,9 @@ Este es el repositorio del grupo X, de la materia Ingenieria y Calidad de Softwa
 
 - `<nn>` Número correlativo de dos dígitos que indica el orden.
   - Ejemplo: 00, 01, 02, ...
+- `<n>`número correlativo entero
+  - Ejemplo dentro de la estructura: TP1, TP2, ..., TP10, ...
+
 
 ---
 ## Ítems de Configuración
@@ -88,7 +91,7 @@ Este es el repositorio del grupo X, de la materia Ingenieria y Calidad de Softwa
 | Bibliografia                | `<Tema>_<Nombre Documento>.<extensión>`    | `/Material_Teorico/Bibliografia/`  | Documentación       |
 | Apuntes                     | `<Nombre Apunte>.<extensión>`              | `/Material_Teorico/Apuntes/`       | Documentación       |
 | ISW_Enunciados TP evaluables 2025 | `ISW_Enunciados TP evaluables 2025.pdf` | `/Trabajos_Practicos/`             | Proyecto       |
-| TP1                         | `TP1 <NombreArchivo>.<extensión>`          | `/Trabajos_Practicos/TP1/`         | Producto          |
+| TP1                         | `TP<n> <NombreArchivo>.<extensión>`          | `/Trabajos_Practicos/TP1/`         | Producto          |
 
 
 ---
