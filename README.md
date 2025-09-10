@@ -73,15 +73,6 @@ Este es el repositorio del grupo 14, de la materia Ingenieria y Calidad de Softw
 
 ---
 
-## Glosario
-
-- `<nn>` Número correlativo de dos dígitos que indica el orden.
-  - Ejemplo: 00, 01, 02, ...
-- `<n>`número correlativo entero
-  - Ejemplo dentro de la estructura: TP1, TP2, ..., TP10, ...
-
-
----
 ## Ítems de Configuración
 
 | Ítem de Configuración       | Regla de Nombrado                          | Ubicación Física                   | Tipo de Ítem              |
@@ -97,3 +88,19 @@ Este es el repositorio del grupo 14, de la materia Ingenieria y Calidad de Softw
 ---
 ## Línea Base del Proyecto
 La linea base del proyecto se establecera luego de la revision y/o aprobacion por parte del equipo docente de los trabajos practicos. Las modificaciones posteriores deben ser justificadas, ya sea por correcciones o cambios necesarios.
+Las líneas base se etiquetarán en el repositorio con la siguiente convención:
+- `LB<n>_TP<n>_v<n>`
+- Ejemplo: LB1_TP4_v1 → Primera línea base, correspondiente al TP4, primera versión aprobada.
+
+---
+## Glosario
+
+- `<nn>` Número correlativo de dos dígitos que indica el orden.
+  - Ejemplo: 00, 01, 02, ...
+- `<n>`Número entero usado como identificador. En algunos casos como trabajos practicos, se utiliza de forma correlativa mientras que  otros casos como los trabajos prácticos evaluables, puede comenzar en un valor distinto y no seguir una correlación estricta.
+  - Ejemplo dentro de la estructura: TP1, TP2, ..., TP10, ...
+  - Ejemplo de Linea base: LB1_TP4_v1, LB1_TP4_v2, ...
+
+
+
+
