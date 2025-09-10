@@ -8,9 +8,9 @@ Este es el repositorio del grupo 14, de la materia Ingenieria y Calidad de Softw
 - [Repositorio del Proyecto](#repositorio-del-proyecto)
 - [Estructura del Proyecto](#estructura-del-proyecto)
 - [Convenciones y Reglas de Nombrado](#convenciones-y-reglas-de-nombrado)
-- [Glosario](#glosario)
 - [Ítems de Configuración](#ítems-de-configuración)
 - [Línea Base del Proyecto](#línea-base-del-proyecto)
+- [Glosario](#glosario)
 
 
 ---
