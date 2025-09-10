@@ -66,10 +66,10 @@ Este es el repositorio del grupo 14, de la materia Ingenieria y Calidad de Softw
 
 - Los trabajos practicos se guardan en carpetas con el formato `TP<NumeroTP>` Ejemplo: 'TP1'
 - Dentro de las carpetas de Trabajos practicos encontraremos las salidas de los mismos, junto a los items de configuracion necesarios.
-- Los archivos dentro de las carpetas `TP<NumeroTP>` deben usar la convencion `TP<NumeroTP><descripcion>.<extencion>`
-- Las diapositivas se deben guardar con el formato `<nn><nombre de la diapositiva>.<extencion>` ejemplo: 01 SCM.pdf
-- La bibliografia se debe guardar con el siguiente formato `<Tema>_<Nombre Documento>.<extencion>`
-- Los apuntes se deben guardar con el siguiente formato `<Fecha>_<Nombre Documento>.<extencion>`
+- Los archivos dentro de las carpetas `TP<NumeroTP>` deben usar la convencion `TP<NumeroTP><descripcion>.<extension>`
+- Las diapositivas se deben guardar con el formato `<nn><nombre de la diapositiva>.<extension>` ejemplo: 01 SCM.pdf
+- La bibliografia se debe guardar con el siguiente formato `<Tema>_<Nombre Documento>.<extension>`
+- Los apuntes se deben guardar con el siguiente formato `<Fecha>_<Nombre Documento>.<extension>`
 
 ---
 
