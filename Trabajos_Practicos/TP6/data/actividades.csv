@@ -1,0 +1,13 @@
+nombre,dia,horario,cupo_disponible,requiere_talle,visitantes
+Tirolesa,2025-10-20,10:00,5,True,
+Tirolesa,2025-10-20,14:00,5,True,
+Tirolesa,2025-10-20,16:00,5,True,
+Safari,2025-10-20,11:00,8,False,
+Safari,2025-10-20,15:00,8,False,
+Safari,2025-10-20,17:00,8,False,
+Palestra,2025-10-20,09:00,10,True,
+Palestra,2025-10-20,13:00,10,True,
+Palestra,2025-10-20,18:00,10,True,
+Jardinería,2025-10-20,12:00,12,False,
+Jardinería,2025-10-20,16:00,12,False,
+Jardinería,2025-10-20,19:00,12,False,
