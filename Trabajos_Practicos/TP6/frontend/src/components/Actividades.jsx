@@ -15,7 +15,7 @@ function Actividades({ onSeleccionar, onVolver }) {
         <div className="container min-vh-100 d-flex flex-column justify-content-center py-5">
             <div className="row w-100">
                 <div className="col-12 col-md-6 mx-auto text-center">
-                    <h1 className="mb-4">Selecciona actividad</h1>
+                    <h1 className="mb-4" style={{ fontSize: "2rem" }}>Selecciona actividad</h1>
 
                     {mensajeError && <div className="alert alert-danger">{mensajeError}</div>}
 
@@ -35,7 +35,7 @@ function Actividades({ onSeleccionar, onVolver }) {
                         !mensajeError && <p>Cargando actividades...</p>
                     )}
 
-                    <button onClick={onVolver} className="btn btn-secondary">
+                    <button onClick={onVolver} className="btn btn-secondary btn-lg">
                         Volver
                     </button>
                 </div>

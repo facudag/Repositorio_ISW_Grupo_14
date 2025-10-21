@@ -1,9 +1,10 @@
 nombre,dia,horario,cupo_disponible,requiere_talle,visitantes
 Tirolesa,2025-10-20,10:00,5,True,
+Tirolesa,2025-10-20,10:10,4,True,
 Tirolesa,2025-10-20,14:00,4,True,
 Tirolesa,2025-10-20,16:00,3,True,43555333
 Tirolesa,2025-10-21,16:00,4,True,
-Tirolesa,2025-10-21,14:00,4,True,
+Tirolesa,2025-10-21,14:00,2,True,43926820;44192390
 Tirolesa,2025-10-22,14:00,2,True,
 Tirolesa,2025-10-23,14:00,4,True,
 Tirolesa,2025-10-24,14:00,4,True,

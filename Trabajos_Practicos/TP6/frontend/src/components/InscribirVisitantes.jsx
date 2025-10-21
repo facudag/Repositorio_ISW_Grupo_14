@@ -96,8 +96,8 @@ function InscribirVisitantes({ actividad, dia, horario, cantidad, onVolver, onEx
                     {mensaje && <div className="alert alert-danger">{mensaje}</div>}
 
                     <div className="d-flex justify-content-between">
-                        <button className="btn btn-secondary" onClick={onVolver}>Volver</button>
-                        <button className="btn btn-primary" onClick={handleEnviar}>Aceptar inscripción</button>
+                        <button className="btn btn-secondary btn-lg" onClick={onVolver}>Volver</button>
+                        <button className="btn btn-primary btn-lg" onClick={handleEnviar}>Aceptar inscripción</button>
                     </div>
                 </div>
             </div>
