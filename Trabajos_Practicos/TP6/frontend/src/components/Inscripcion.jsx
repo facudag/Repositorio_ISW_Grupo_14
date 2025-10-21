@@ -12,9 +12,11 @@ function Inscripcion({ actividad, onVolver, onSiguiente }) {
             .then(res => res.json())
             .then(data => {
                 setHorarios(data);
-                const diasDisponibles = Object.keys(data);
-                setDias(diasDisponibles);
 
+                // Obtenemos todos los días
+                const diasDisponibles = Object.keys(data);
+
+                // Día de hoy en formato YYYY-MM-DD
                 const hoy = new Date();
                 const hoyStr =
                     hoy.getFullYear() +
@@ -23,11 +25,17 @@ function Inscripcion({ actividad, onVolver, onSiguiente }) {
                     "-" +
                     String(hoy.getDate()).padStart(2, "0");
 
-                const diaDefault = diasDisponibles.includes(hoyStr)
+                // Filtramos solo los días que sean hoy o futuros
+                const diasValidos = diasDisponibles.filter(d => d >= hoyStr);
+                setDias(diasValidos);
+
+                // Selección por defecto: hoy si está disponible, sino el primer día válido
+                const diaDefault = diasValidos.includes(hoyStr)
                     ? hoyStr
-                    : diasDisponibles[0] || "";
+                    : diasValidos[0] || "";
                 setDiaSeleccionado(diaDefault);
 
+                // Primer horario por defecto
                 const primerHorario = Object.keys(data[diaDefault] || {})[0] || "";
                 setHorarioSeleccionado(primerHorario);
 
@@ -79,6 +87,7 @@ function Inscripcion({ actividad, onVolver, onSiguiente }) {
                                 </option>
                             ))}
                         </select>
+                        {dias.length === 0 && <small className="text-danger">No hay dias disponibles actualmente.</small>}
                     </div>
 
                     <div className="mb-3">
@@ -123,6 +132,7 @@ function Inscripcion({ actividad, onVolver, onSiguiente }) {
                         <button
                             className="btn btn-primary btn-lg"
                             onClick={handleAceptar}
+                            disabled={dias.length === 0} // deshabilitado si no hay días futuros
                         >
                             Aceptar
                         </button>
