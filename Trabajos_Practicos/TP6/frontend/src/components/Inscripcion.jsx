@@ -13,36 +13,60 @@ function Inscripcion({ actividad, onVolver, onSiguiente }) {
             .then(data => {
                 setHorarios(data);
 
-                // Obtenemos todos los días
-                const diasDisponibles = Object.keys(data);
-
-                // Día de hoy en formato YYYY-MM-DD
                 const hoy = new Date();
-                const hoyStr =
-                    hoy.getFullYear() +
-                    "-" +
-                    String(hoy.getMonth() + 1).padStart(2, "0") +
-                    "-" +
-                    String(hoy.getDate()).padStart(2, "0");
+                const mañana = new Date(hoy);
+                mañana.setDate(hoy.getDate() + 1);
 
-                // Filtramos solo los días que sean hoy o futuros
-                const diasValidos = diasDisponibles.filter(d => d >= hoyStr);
-                setDias(diasValidos);
+                const hoyStr = hoy.toISOString().split("T")[0];
+                const mañanaStr = mañana.toISOString().split("T")[0];
 
-                // Selección por defecto: hoy si está disponible, sino el primer día válido
-                const diaDefault = diasValidos.includes(hoyStr)
+                // ✅ Mostrar solo hoy y mañana si existen en los datos
+                const diasDisponibles = Object.keys(data).filter(
+                    d => d === hoyStr || d === mañanaStr
+                );
+
+                setDias(diasDisponibles);
+
+                // ✅ Día por defecto: hoy si está, sino mañana
+                const diaDefault = diasDisponibles.includes(hoyStr)
                     ? hoyStr
-                    : diasValidos[0] || "";
+                    : diasDisponibles[0] || "";
                 setDiaSeleccionado(diaDefault);
-
-                // Primer horario por defecto
-                const primerHorario = Object.keys(data[diaDefault] || {})[0] || "";
-                setHorarioSeleccionado(primerHorario);
 
                 setCantidad(1);
             })
             .catch(err => console.error(err));
     }, [actividad]);
+
+    // 🔹 Filtramos los horarios según la hora actual si el día es hoy
+    const horariosFiltrados = (() => {
+        if (!diaSeleccionado || !horarios[diaSeleccionado]) return [];
+
+        const hoy = new Date();
+        const hoyStr = hoy.toISOString().split("T")[0];
+
+        // Si es mañana, mostrar todos los horarios
+        if (diaSeleccionado !== hoyStr) {
+            return Object.entries(horarios[diaSeleccionado]);
+        }
+
+        // Si es hoy, mostrar solo los horarios futuros
+        return Object.entries(horarios[diaSeleccionado]).filter(([h]) => {
+            const [hora, minuto] = h.split(":").map(Number);
+            const horarioDate = new Date();
+            horarioDate.setHours(hora, minuto, 0, 0);
+            return horarioDate > hoy;
+        });
+    })();
+
+    useEffect(() => {
+        // ✅ Selecciona el primer horario disponible al cambiar de día
+        if (horariosFiltrados.length > 0) {
+            setHorarioSeleccionado(horariosFiltrados[0][0]);
+        } else {
+            setHorarioSeleccionado("");
+        }
+    }, [diaSeleccionado, horariosFiltrados]);
 
     const cupoDisponible =
         horarioSeleccionado && horarios[diaSeleccionado]
@@ -74,6 +98,7 @@ function Inscripcion({ actividad, onVolver, onSiguiente }) {
                         {actividad}
                     </h2>
 
+                    {/* Día */}
                     <div className="mb-3">
                         <label className="form-label">Día:</label>
                         <select
@@ -87,9 +112,14 @@ function Inscripcion({ actividad, onVolver, onSiguiente }) {
                                 </option>
                             ))}
                         </select>
-                        {dias.length === 0 && <small className="text-danger">No hay dias disponibles actualmente.</small>}
+                        {dias.length === 0 && (
+                            <small className="text-danger">
+                                No hay días disponibles actualmente.
+                            </small>
+                        )}
                     </div>
 
+                    {/* Horarios */}
                     <div className="mb-3">
                         <label className="form-label">Horario:</label>
                         <select
@@ -97,17 +127,20 @@ function Inscripcion({ actividad, onVolver, onSiguiente }) {
                             value={horarioSeleccionado}
                             onChange={e => setHorarioSeleccionado(e.target.value)}
                         >
-                            {(horarios[diaSeleccionado]
-                                ? Object.entries(horarios[diaSeleccionado])
-                                : []
-                            ).map(([h, cupo]) => (
+                            {horariosFiltrados.map(([h, cupo]) => (
                                 <option key={h} value={h}>
                                     {h} (Cupos: {cupo})
                                 </option>
                             ))}
                         </select>
+                        {horariosFiltrados.length === 0 && (
+                            <small className="text-danger">
+                                No hay horarios disponibles para este día.
+                            </small>
+                        )}
                     </div>
 
+                    {/* Cantidad */}
                     <div className="mb-4">
                         <label className="form-label">
                             Cantidad de visitantes (máx {cupoDisponible}):
@@ -122,17 +155,17 @@ function Inscripcion({ actividad, onVolver, onSiguiente }) {
                         />
                     </div>
 
+                    {/* Botones */}
                     <div className="d-flex justify-content-between">
-                        <button
-                            className="btn btn-secondary btn-lg"
-                            onClick={onVolver}
-                        >
+                        <button className="btn btn-secondary btn-lg" onClick={onVolver}>
                             Volver
                         </button>
                         <button
                             className="btn btn-primary btn-lg"
                             onClick={handleAceptar}
-                            disabled={dias.length === 0} // deshabilitado si no hay días futuros
+                            disabled={
+                                dias.length === 0 || horariosFiltrados.length === 0
+                            }
                         >
                             Aceptar
                         </button>

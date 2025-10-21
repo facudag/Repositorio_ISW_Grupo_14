@@ -24,7 +24,7 @@ def test_inscripcion_exitosa(gestor):
     )
     assert resultado is True
     # Verificar que se haya reducido el cupo
-    assert actividad.horarios["2025-10-20"]["10:00"] == 4  # antes era 5
+    assert actividad.horarios["2025-10-20"]["10:00"] == 9  # antes era 10
 
 def test_inscripcion_sin_cupo(gestor):
     actividad = gestor.buscar_actividad("Tirolesa")

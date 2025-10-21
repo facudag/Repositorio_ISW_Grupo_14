@@ -19,6 +19,29 @@ function InscribirVisitantes({ actividad, dia, horario, cantidad, onVolver, onEx
             return;
         }
 
+        // 🔹 Validación de edad según actividad
+        let edadMinima = 0;
+        if (actividad.toLowerCase() === "palestra") edadMinima = 12;
+        if (actividad.toLowerCase() === "tirolesa") edadMinima = 8;
+
+        for (let i = 0; i < visitantes.length; i++) {
+            const { nombre, dni, edad } = visitantes[i];
+            if (!nombre || !dni || !edad) {
+                setMensaje(`Todos los campos son obligatorios para el visitante ${i + 1}.`);
+                return;
+            }
+            if (isNaN(edad) || edad <= 0) {
+                setMensaje(`La edad ingresada para el visitante ${i + 1} no es válida.`);
+                return;
+            }
+            if (edad < edadMinima) {
+                setMensaje(
+                    `El visitante ${i + 1} no cumple con la edad mínima (${edadMinima} años) para ${actividad}.`
+                );
+                return;
+            }
+        }
+
         try {
             const res = await fetch(`http://127.0.0.1:5000/api/actividades/${actividad}/inscribir`, {
                 method: "POST",
@@ -40,6 +63,10 @@ function InscribirVisitantes({ actividad, dia, horario, cantidad, onVolver, onEx
         }
     };
 
+    // 🔹 Definir si la actividad requiere talle
+    const requiereTalle = ["palestra", "tirolesa"].includes(actividad.toLowerCase());
+    const talles = ["XS", "S", "M", "L", "XL", "XXL"];
+
     return (
         <div className="container min-vh-100 d-flex flex-column justify-content-center py-5">
             <div className="row w-100">
@@ -58,6 +85,7 @@ function InscribirVisitantes({ actividad, dia, horario, cantidad, onVolver, onEx
                                     onChange={e => handleChange(i, "nombre", e.target.value)}
                                 />
                                 <input
+                                    type="number"
                                     className="form-control mb-2"
                                     placeholder="DNI"
                                     value={v.dni}
@@ -70,12 +98,20 @@ function InscribirVisitantes({ actividad, dia, horario, cantidad, onVolver, onEx
                                     value={v.edad}
                                     onChange={e => handleChange(i, "edad", e.target.value)}
                                 />
-                                <input
-                                    className="form-control"
-                                    placeholder="Talle (si aplica)"
-                                    value={v.talle}
-                                    onChange={e => handleChange(i, "talle", e.target.value)}
-                                />
+
+                                {/* 🔹 Mostrar solo si la actividad requiere talle */}
+                                {requiereTalle && (
+                                    <select
+                                        className="form-select"
+                                        value={v.talle}
+                                        onChange={e => handleChange(i, "talle", e.target.value)}
+                                    >
+                                        <option value="">Seleccionar talle</option>
+                                        {talles.map(t => (
+                                            <option key={t} value={t}>{t}</option>
+                                        ))}
+                                    </select>
+                                )}
                             </div>
                         </div>
                     ))}
@@ -89,7 +125,7 @@ function InscribirVisitantes({ actividad, dia, horario, cantidad, onVolver, onEx
                             onChange={e => setAceptoTerminos(e.target.checked)}
                         />
                         <label className="form-check-label" htmlFor="terminosCheck">
-                            Acepto términos y condiciones
+                            Acepto<a href="..\..\public\TerminosYCondiciones.pdf"> términos y condiciones</a>
                         </label>
                     </div>
 
