@@ -34,6 +34,7 @@ class Visitante:
         return f"Visitante({self.nombre},{self.dni},{self.edad},{self.talle})"
 
 
+
 class Actividad:
     def __init__(self, nombre: str, requiere_talle: bool = False):
         self.nombre = nombre
