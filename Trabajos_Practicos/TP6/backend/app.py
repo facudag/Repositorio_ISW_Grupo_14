@@ -6,8 +6,8 @@ app = Flask(__name__)
 CORS(app)
 
 # Ruta del archivo CSV con las actividades
-CSV_PATH = "data/actividades.csv"
-gestor = GestorActividades(CSV_PATH)
+# CSV_PATH = "data/actividades.csv" <-- ELIMINADO
+gestor = GestorActividades() # <-- MODIFICADO: Ya no necesita la ruta
 
 
 # ----------------------------
@@ -46,7 +46,7 @@ def inscribir_visitantes(nombre):
     exito = gestor.inscribir_visitantes(nombre, dia, horario, visitantes_list, acepto_terminos)
 
     if exito:
-        gestor.guardar_actividades_csv()
+        # gestor.guardar_actividades_csv() <-- ELIMINADO
         return jsonify({"mensaje": "Inscripción exitosa"}), 200
     else:
         return jsonify({"error": "Error en la inscripción o cupo lleno"}), 400

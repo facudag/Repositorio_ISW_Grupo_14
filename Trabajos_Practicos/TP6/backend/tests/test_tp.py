@@ -4,12 +4,10 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 import pytest
 from src.clases import Actividad, GestorActividades, Visitante
 
-# Path al CSV de actividades
-CSV_PATH = "data/actividades.csv"
 
 @pytest.fixture
 def gestor():
-    gestor = GestorActividades(CSV_PATH)
+    gestor = GestorActividades()
     return gestor
 
 def test_inscripcion_exitosa(gestor):

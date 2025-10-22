@@ -1,9 +1,445 @@
-# src/clases.py
 import csv
 from typing import List, Dict, Optional
+import io  # <-- 1. Importar io
 
+# 2. Todos los datos del CSV están ahora "hardcodeados" aquí
+DATOS_CSV_HARDCODEADOS = """nombre,dia,horario,cupo_disponible,requiere_talle,visitantes
+Safari,2025-10-20,09:00,8,False,
+Safari,2025-10-20,09:30,8,False,
+Safari,2025-10-20,10:00,8,False,
+Safari,2025-10-20,10:30,8,False,
+Safari,2025-10-20,11:00,8,False,
+Safari,2025-10-20,11:30,8,False,
+Safari,2025-10-20,12:00,8,False,
+Safari,2025-10-20,12:30,8,False,
+Safari,2025-10-20,13:00,8,False,
+Safari,2025-10-20,13:30,8,False,
+Safari,2025-10-20,14:00,8,False,
+Safari,2025-10-20,14:30,8,False,
+Safari,2025-10-20,15:00,8,False,
+Safari,2025-10-20,15:30,8,False,
+Safari,2025-10-20,16:00,8,False,
+Safari,2025-10-20,16:30,8,False,
+Safari,2025-10-20,17:00,8,False,
+Safari,2025-10-20,17:30,8,False,
+Safari,2025-10-21,09:00,7,False,4444444444
+Safari,2025-10-21,09:30,8,False,
+Safari,2025-10-21,10:00,8,False,
+Safari,2025-10-21,10:30,8,False,
+Safari,2025-10-21,11:00,8,False,
+Safari,2025-10-21,11:30,8,False,
+Safari,2025-10-21,12:00,8,False,
+Safari,2025-10-21,12:30,8,False,
+Safari,2025-10-21,13:00,8,False,
+Safari,2025-10-21,13:30,8,False,
+Safari,2025-10-21,14:00,8,False,
+Safari,2025-10-21,14:30,8,False,
+Safari,2025-10-21,15:00,8,False,
+Safari,2025-10-21,15:30,8,False,
+Safari,2025-10-21,16:00,8,False,
+Safari,2025-10-21,16:30,8,False,
+Safari,2025-10-21,17:00,7,False,asdasdasdasd
+Safari,2025-10-21,17:30,8,False,
+Safari,2025-10-22,09:00,8,False,
+Safari,2025-10-22,09:30,8,False,
+Safari,2025-10-22,10:00,8,False,
+Safari,2025-10-22,10:30,8,False,
+Safari,2025-10-22,11:00,8,False,
+Safari,2025-10-22,11:30,8,False,
+Safari,2025-10-22,12:00,8,False,
+Safari,2025-10-22,12:30,8,False,
+Safari,2025-10-22,13:00,8,False,
+Safari,2025-10-22,13:30,8,False,
+Safari,2025-10-22,14:00,8,False,
+Safari,2025-10-22,14:30,8,False,
+Safari,2025-10-22,15:00,8,False,
+Safari,2025-10-22,15:30,8,False,
+Safari,2025-10-22,16:00,8,False,
+Safari,2025-10-22,16:30,8,False,
+Safari,2025-10-22,17:00,8,False,
+Safari,2025-10-22,17:30,8,False,
+Safari,2025-10-23,09:00,8,False,
+Safari,2025-10-23,09:30,8,False,
+Safari,2025-10-23,10:00,8,False,
+Safari,2025-10-23,10:30,8,False,
+Safari,2025-10-23,11:00,8,False,
+Safari,2025-10-23,11:30,8,False,
+Safari,2025-10-23,12:00,8,False,
+Safari,2025-10-23,12:30,8,False,
+Safari,2025-10-23,13:00,8,False,
+Safari,2025-10-23,13:30,8,False,
+Safari,2025-10-23,14:00,8,False,
+Safari,2025-10-23,14:30,8,False,
+Safari,2025-10-23,15:00,8,False,
+Safari,2025-10-23,15:30,8,False,
+Safari,2025-10-23,16:00,8,False,
+Safari,2025-10-23,16:30,8,False,
+Safari,2025-10-23,17:00,8,False,
+Safari,2025-10-23,17:30,8,False,
+Safari,2025-10-24,09:00,8,False,
+Safari,2025-10-24,09:30,8,False,
+Safari,2025-10-24,10:00,8,False,
+Safari,2025-10-24,10:30,8,False,
+Safari,2025-10-24,11:00,8,False,
+Safari,2025-10-24,11:30,8,False,
+Safari,2025-10-24,12:00,8,False,
+Safari,2025-10-24,12:30,8,False,
+Safari,2025-10-24,13:00,8,False,
+Safari,2025-10-24,13:30,8,False,
+Safari,2025-10-24,14:00,8,False,
+Safari,2025-10-24,14:30,8,False,
+Safari,2025-10-24,15:00,8,False,
+Safari,2025-10-24,15:30,8,False,
+Safari,2025-10-24,16:00,8,False,
+Safari,2025-10-24,16:30,8,False,
+Safari,2025-10-24,17:00,8,False,
+Safari,2025-10-24,17:30,8,False,
+Safari,2025-10-25,09:00,8,False,
+Safari,2025-10-25,09:30,8,False,
+Safari,2025-10-25,10:00,8,False,
+Safari,2025-10-25,10:30,8,False,
+Safari,2025-10-25,11:00,8,False,
+Safari,2025-10-25,11:30,8,False,
+Safari,2025-10-25,12:00,8,False,
+Safari,2025-10-25,12:30,8,False,
+Safari,2025-10-25,13:00,8,False,
+Safari,2025-10-25,13:30,8,False,
+Safari,2025-10-25,14:00,8,False,
+Safari,2025-10-25,14:30,8,False,
+Safari,2025-10-25,15:00,8,False,
+Safari,2025-10-25,15:30,8,False,
+Safari,2025-10-25,16:00,8,False,
+Safari,2025-10-25,16:30,8,False,
+Safari,2025-10-25,17:00,8,False,
+Safari,2025-10-25,17:30,8,False,
+Palestra,2025-10-20,09:00,12,True,
+Palestra,2025-10-20,09:30,12,True,
+Palestra,2025-10-20,10:00,12,True,
+Palestra,2025-10-20,10:30,12,True,
+Palestra,2025-10-20,11:00,12,True,
+Palestra,2025-10-20,11:30,12,True,
+Palestra,2025-10-20,12:00,12,True,
+Palestra,2025-10-20,12:30,12,True,
+Palestra,2025-10-20,13:00,12,True,
+Palestra,2025-10-20,13:30,12,True,
+Palestra,2025-10-20,14:00,12,True,
+Palestra,2025-10-20,14:30,12,True,
+Palestra,2025-10-20,15:00,12,True,
+Palestra,2025-10-20,15:30,12,True,
+Palestra,2025-10-20,16:00,12,True,
+Palestra,2025-10-20,16:30,12,True,
+Palestra,2025-10-20,17:00,12,True,
+Palestra,2025-1Delectra,2025-10-20,17:30,12,True,
+Palestra,2025-10-21,09:00,10,True,222222222;43999999
+Palestra,2025-10-21,09:30,12,True,
+Palestra,2025-10-21,10:00,12,True,
+Palestra,2025-10-21,10:30,12,True,
+Palestra,2025-10-21,11:00,12,True,
+Palestra,2025-10-21,11:30,12,True,
+Palestra,2025-10-21,12:00,12,True,
+Palestra,2025-10-21,12:30,12,True,
+Palestra,2025-10-21,13:00,12,True,
+Palestra,2025-10-21,13:30,12,True,
+Palestra,2025-10-21,14:00,12,True,
+Palestra,2025-10-21,14:30,12,True,
+Palestra,2025-10-21,15:00,12,True,
+Palestra,2025-10-21,15:30,12,True,
+Palestra,2025-10-21,16:00,12,True,
+Palestra,2025-10-21,16:30,12,True,
+Palestra,2025-10-21,17:00,12,True,
+Palestra,2025-10-21,17:30,12,True,
+Palestra,2025-10-22,09:00,12,True,
+Palestra,2025-10-22,09:30,12,True,
+Palestra,2025-10-22,10:00,12,True,
+Palestra,2025-10-22,10:30,12,True,
+Palestra,2025-10-22,11:00,12,True,
+Palestra,2025-10-22,11:30,12,True,
+Palestra,2025-10-22,12:00,12,True,
+Palestra,2025-10-22,12:30,12,True,
+Palestra,2025-10-22,13:00,12,True,
+Palestra,2025-10-22,13:30,12,True,
+Palestra,2025-10-22,14:00,12,True,
+Palestra,2025-10-22,14:30,12,True,
+Palestra,2025-10-22,15:00,12,True,
+Palestra,2025-10-22,15:30,12,True,
+Palestra,2025-10-22,16:00,12,True,
+Palestra,2025-10-22,16:30,12,True,
+Palestra,2025-10-22,17:00,12,True,
+Palestra,2025-10-22,17:30,12,True,
+Palestra,2025-10-23,09:00,12,True,
+Palestra,2025-10-23,09:30,12,True,
+Palestra,2025-10-23,10:00,12,True,
+Palestra,2025-10-23,10:30,12,True,
+Palestra,2025-10-23,11:00,12,True,
+Palestra,2025-10-23,11:30,12,True,
+Palestra,2025-10-23,12:00,12,True,
+Palestra,2025-10-23,12:30,12,True,
+Palestra,2025-10-23,13:00,12,True,
+Palestra,2025-10-23,13:30,12,True,
+Palestra,2025-10-23,14:00,12,True,
+Palestra,2025-10-23,14:30,12,True,
+Palestra,2025-10-23,15:00,12,True,
+Palestra,2025-10-23,15:30,12,True,
+Palestra,2025-10-23,16:00,12,True,
+Palestra,2025-10-23,16:30,12,True,
+Palestra,2025-10-23,17:00,12,True,
+Palestra,2025-10-23,17:30,12,True,
+Palestra,2025-10-24,09:00,12,True,
+Palestra,2025-10-24,09:30,12,True,
+Palestra,2025-10-24,10:00,12,True,
+Palestra,2025-10-24,10:30,12,True,
+Palestra,2025-10-24,11:00,12,True,
+Palestra,2025-10-24,11:30,12,True,
+Palestra,2025-10-24,12:00,12,True,
+Palestra,2025-10-24,12:30,12,True,
+Palestra,2025-10-24,13:00,12,True,
+Palestra,2025-10-24,13:30,12,True,
+Palestra,2025-10-24,14:00,12,True,
+Palestra,2025-10-24,14:30,12,True,
+Palestra,2025-10-24,15:00,12,True,
+Palestra,2025-10-24,15:30,12,True,
+Palestra,2025-10-24,16:00,12,True,
+Palestra,2025-10-24,16:30,12,True,
+Palestra,2025-10-24,17:00,12,True,
+Palestra,2025-10-24,17:30,12,True,
+Palestra,2025-10-25,09:00,12,True,
+Palestra,2025-10-25,09:30,12,True,
+Palestra,2025-10-25,10:00,12,True,
+Palestra,2025-10-25,10:30,12,True,
+Palestra,2025-10-25,11:00,12,True,
+Palestra,2025-10-25,11:30,12,True,
+Palestra,2025-10-25,12:00,12,True,
+Palestra,2025-10-25,12:30,12,True,
+Palestra,2025-10-25,13:00,12,True,
+Palestra,2025-10-25,13:30,12,True,
+Palestra,2025-10-25,14:00,12,True,
+Palestra,2025-10-25,14:30,12,True,
+Palestra,2025-10-25,15:00,12,True,
+Palestra,2025-10-25,15:30,12,True,
+Palestra,2025-10-25,16:00,12,True,
+Palestra,2025-10-25,16:30,12,True,
+Palestra,2025-10-25,17:00,12,True,
+Palestra,2025-10-25,17:30,12,True,
+Jardinería,2025-10-20,09:00,12,False,
+Jardinería,2025-10-20,09:30,12,False,
+Jardinería,2025-10-20,10:00,12,False,
+Jardinería,2025-10-20,10:30,12,False,
+Jardinería,2025-10-20,11:00,12,False,
+Jardinería,2025-10-20,11:30,12,False,
+Jardinería,2025-10-20,12:00,12,False,
+Jardinería,2025-10-20,12:30,12,False,
+Jardinería,2025-10-20,13:00,12,False,
+Jardinería,2025-10-20,13:30,12,False,
+Jardinería,2025-10-20,14:00,12,False,
+Jardinería,2025-10-20,14:30,12,False,
+Jardinería,2025-10-20,15:00,12,False,
+Jardinería,2025-10-20,15:30,12,False,
+Jardinería,2025-10-20,16:00,12,False,
+Jardinería,2025-10-20,16:30,12,False,
+Jardinería,2025-10-20,17:00,12,False,
+Jardinería,2025-10-20,17:30,12,False,
+Jardinería,2025-10-21,09:00,12,False,
+Jardinería,2025-10-21,09:30,12,False,
+Jardinería,2025-10-21,10:00,12,False,
+Jardinería,2025-10-21,10:30,12,False,
+Jardinería,2025-10-21,11:00,12,False,
+Jardinería,2025-10-21,11:30,12,False,
+Jardinería,2025-10-21,12:00,12,False,
+Jardinería,2025-10-21,12:30,12,False,
+Jardinería,2025-10-21,13:00,12,False,
+Jardinería,2025-10-21,13:30,12,False,
+Jardinería,2025-10-21,14:00,12,False,
+Jardinería,2025-10-21,14:30,12,False,
+Jardinería,2025-10-21,15:00,12,False,
+Jardinería,2025-10-21,15:30,12,False,
+Jardinería,2025-10-21,16:00,12,False,
+Jardinería,2025-10-21,16:30,12,False,
+Jardinería,2025-10-21,17:00,12,False,
+Jardinería,2025-10-21,17:30,12,False,
+Jardinería,2025-10-22,09:00,12,False,
+Jardinería,2025-10-22,09:30,12,False,
+Jardinería,2025-10-22,10:00,12,False,
+Jardinería,2025-10-22,10:30,12,False,
+Jardinería,2025-10-22,11:00,12,False,
+Jardinería,2025-10-22,11:30,12,False,
+Jardinería,2025-10-22,12:00,12,False,
+Jardinería,2025-10-22,12:30,12,False,
+Jardinería,2025-10-22,13:00,12,False,
+Jardinería,2025-10-22,13:30,12,False,
+Jardinería,2025-10-22,14:00,12,False,
+Jardinería,2025-10-22,14:30,12,False,
+Jardinería,2025-10-22,15:00,12,False,
+Jardinería,2025-10-22,15:30,12,False,
+Jardinería,2025-10-22,16:00,12,False,
+Jardinería,2025-10-22,16:30,12,False,
+Jardinería,2025-10-22,17:00,12,False,
+Jardinería,2025-10-22,17:30,12,False,
+Jardinería,2025-10-23,09:00,12,False,
+Jardinería,2025-10-23,09:30,12,False,
+Jardinería,2025-10-23,10:00,12,False,
+Jardinería,2025-10-23,10:30,12,False,
+Jardinería,2025-10-23,11:00,12,False,
+Jardinería,2025-10-23,11:30,12,False,
+Jardinería,2025-10-23,12:00,12,False,
+Jardinería,2025-10-23,12:30,12,False,
+Jardinería,2025-10-23,13:00,12,False,
+Jardinería,2025-10-23,13:30,12,False,
+Jardinería,2025-10-23,14:00,12,False,
+Jardinería,2025-10-23,14:30,12,False,
+Jardinería,2025-10-23,15:00,12,False,
+Jardinería,2025-10-23,15:30,12,False,
+Jardinería,2025-10-23,16:00,12,False,
+Jardinería,2025-10-23,16:30,12,False,
+Jardinería,2025-10-23,17:00,12,False,
+Jardinería,2025-10-23,17:30,12,False,
+Jardinería,2025-10-24,09:00,12,False,
+Jardinería,2025-10-24,09:30,12,False,
+Jardinería,2025-10-24,10:00,12,False,
+Jardinería,2025-10-24,10:30,12,False,
+Jardinería,2025-10-24,11:00,12,False,
+Jardinería,2025-10-24,11:30,12,False,
+Jardinería,2025-10-24,12:00,12,False,
+Jardinería,2025-10-24,12:30,12,False,
+Jardinería,2025-10-24,13:00,12,False,
+Jardinería,2025-10-24,13:30,12,False,
+Jardinería,2025-10-24,14:00,12,False,
+Jardinería,2025-10-24,14:30,12,False,
+Jardinería,2025-10-24,15:00,12,False,
+Jardinería,2025-10-24,15:30,12,False,
+Jardinería,2025-10-24,16:00,12,False,
+Jardinería,2025-10-24,16:30,12,False,
+Jardinería,2025-10-24,17:00,12,False,
+Jardinería,2025-10-24,17:30,12,False,
+Jardinería,2025-10-25,09:00,12,False,
+Jardinería,2025-10-25,09:30,12,False,
+Jardinería,2025-10-25,10:00,12,False,
+Jardinería,2025-10-25,10:30,12,False,
+Jardinería,2025-10-25,11:00,12,False,
+Jardinería,2025-10-25,11:30,12,False,
+Jardinería,2025-10-25,12:00,12,False,
+Jardinería,2025-10-25,12:30,12,False,
+Jardinería,2025-10-25,13:00,12,False,
+Jardinería,2025-10-25,13:30,12,False,
+Jardinería,2025-10-25,14:00,12,False,
+Jardinería,2025-10-25,14:30,12,False,
+Jardinería,2025-10-25,15:00,12,False,
+Jardinería,2025-10-25,15:30,12,False,
+Jardinería,2025-10-25,16:00,12,False,
+Jardinería,2025-10-25,16:30,12,False,
+Jardinería,2025-10-25,17:00,12,False,
+Jardinería,2025-10-25,17:30,12,False,
+Tirolesa,2025-10-20,09:00,10,True,
+Tirolesa,2025-10-20,09:30,10,True,
+Tirolesa,2025-10-20,10:00,10,True,
+Tirolesa,2025-10-20,10:30,10,True,
+Tirolesa,2025-10-20,11:00,10,True,
+Tirolesa,2025-10-20,11:30,10,True,
+Tirolesa,2025-10-20,12:00,10,True,
+Tirolesa,2025-10-20,12:30,10,True,
+Tirolesa,2025-10-20,13:00,10,True,
+Tirolesa,2025-10-20,13:30,10,True,
+Tirolesa,2025-10-20,14:00,10,True,
+Tirolesa,2025-10-20,14:30,10,True,
+Tirolesa,2025-10-20,15:00,10,True,
+Tirolesa,2025-10-20,15:30,10,True,
+Tirolesa,2025-10-20,16:00,10,True,
+Tirolesa,2025-10-20,16:30,10,True,
+Tirolesa,2025-10-20,17:00,10,True,
+Tirolesa,2025-10-20,17:30,10,True,
+Tirolesa,2025-10-21,09:00,8,True,43999222;11111111111
+Tirolesa,2025-10-21,09:30,10,True,
+Tirolesa,2025-10-21,10:00,10,True,
+Tirolesa,2025-10-21,10:30,10,True,
+Tirolesa,2025-10-21,11:00,10,True,
+Tirolesa,2025-10-21,11:30,10,True,
+Tirolesa,2025-10-21,12:00,10,True,
+Tirolesa,2025-10-21,12:30,10,True,
+Tirolesa,2025-10-21,13:00,10,True,
+Tirolesa,2025-10-21,13:30,10,True,
+Tirolesa,2025-10-21,14:00,10,True,
+Tirolesa,2025-10-21,14:30,10,True,
+Tirolesa,2025-10-21,15:00,10,True,
+Tirolesa,2025-10-21,15:30,10,True,
+Tirolesa,2025-10-21,16:00,10,True,
+Tirolesa,2025-10-21,16:30,10,True,
+Tirolesa,2025-10-21,17:00,9,True,43926820
+Tirolesa,2025-10-21,17:30,10,True,
+Tirolesa,2025-10-22,09:00,10,True,
+Tirolesa,2025-10-22,09:30,10,True,
+Tirolesa,2025-10-22,10:00,10,True,
+Tirolesa,2025-10-22,10:30,10,True,
+Tirolesa,2025-10-22,11:00,10,True,
+Tirolesa,2025-1Dnirolesa,2025-10-22,11:30,10,True,
+Tirolesa,2025-10-22,12:00,10,True,
+Tirolesa,2025-10-22,12:30,10,True,
+Tirolesa,2025-10-22,13:00,10,True,
+Tirolesa,2025-10-22,13:30,10,True,
+Tirolesa,2025-10-22,14:00,10,True,
+Tirolesa,2025-10-22,14:30,10,True,
+Tirolesa,2025-10-22,15:00,10,True,
+Tirolesa,2025-10-22,15:30,10,True,
+Tirolesa,2025-10-22,16:00,10,True,
+Tirolesa,2025-10-22,16:30,10,True,
+Tirolesa,2025-10-22,17:00,10,True,
+Tirolesa,2025-10-22,17:30,10,True,
+Tirolesa,2025-10-23,09:00,10,True,
+Tirolesa,2025-10-23,09:30,10,True,
+Tirolesa,2025-10-23,10:00,10,True,
+Tirolesa,2025-10-23,10:30,10,True,
+Tirolesa,2025-10-23,11:00,10,True,
+Tirolesa,2025-10-23,11:30,10,True,
+Tirolesa,2025-10-23,12:00,10,True,
+Tirolesa,2025-10-23,12:30,10,True,
+Tirolesa,2025-10-23,13:00,10,True,
+Tirolesa,2025-10-23,13:30,10,True,
+Tirolesa,2025-10-23,14:00,10,True,
+Tirolesa,2025-10-23,14:30,10,True,
+Tirolesa,2025-10-23,15:00,10,True,
+Tirolesa,2025-10-23,15:30,10,True,
+Tirolesa,2025-10-23,16:00,10,True,
+Tirolesa,2025-10-23,16:30,10,True,
+Tirolesa,2025-10-23,17:00,10,True,
+Tirolesa,2025-10-23,17:30,10,True,
+Tirolesa,2025-10-24,09:00,10,True,
+Tirolesa,2025-10-24,09:30,10,True,
+Tirolesa,2025-10-24,10:00,10,True,
+Tirolesa,2025-10-24,10:30,10,True,
+Tirolesa,2025-10-24,11:00,10,True,
+Tirolesa,2025-10-24,11:30,10,True,
+Tirolesa,2025-10-24,12:00,10,True,
+Tirolesa,2025-10-24,12:30,10,True,
+Tirolesa,2025-10-24,13:00,10,True,
+Tirolesa,2025-10-24,13:30,10,True,
+Tirolesa,2025-10-24,14:00,10,True,
+Tirolesa,2025-10-24,14:30,10,True,
+Tirolesa,2025-10-24,15:00,10,True,
+Tirolesa,2025-10-24,15:30,10,True,
+Tirolesa,2025-10-24,16:00,10,True,
+Tirolesa,2025-10-24,16:30,10,True,
+Tirolesa,2025-10-24,17:00,10,True,
+Tirolesa,2025-10-24,17:30,10,True,
+Tirolesa,2025-10-25,09:00,10,True,
+Tirolesa,2025-10-25,09:30,10,True,
+Tirolesa,2025-10-25,10:00,10,True,
+Tirolesa,2025-10-25,10:30,10,True,
+Tirolesa,2025-10-25,11:00,10,True,
+Tirolesa,2025-10-25,11:30,10,True,
+Tirolesa,2025-10-25,12:00,10,True,
+Tirolesa,2025-10-25,12:30,10,True,
+Tirolesa,2025-10-25,13:00,10,True,
+Tirolesa,2025-10-25,13:30,10,True,
+Tirolesa,2025-10-25,14:00,10,True,
+Tirolesa,2025-10-25,14:30,10,True,
+Tirolesa,2025-10-25,15:00,10,True,
+Tirolesa,2025-10-25,15:30,10,True,
+Tirolesa,2025-10-25,16:00,10,True,
+Tirolesa,2025-10-25,16:30,10,True,
+Tirolesa,2025-10-25,17:00,10,True,
+Tirolesa,2025-10-25,17:30,10,True,
+"""
 
 class Visitante:
+    # ... (El código de Visitante no cambia)
     def __init__(self, nombre: str, dni: str, edad: int, talle: Optional[str] = None):
         self.nombre = nombre
         self.dni = dni
@@ -34,8 +470,8 @@ class Visitante:
         return f"Visitante({self.nombre},{self.dni},{self.edad},{self.talle})"
 
 
-
 class Actividad:
+    # ... (El código de Actividad no cambia)
     def __init__(self, nombre: str, requiere_talle: bool = False):
         self.nombre = nombre
         self.requiere_talle = requiere_talle
@@ -117,37 +553,40 @@ class Actividad:
 
 
 class GestorActividades:
-    def __init__(self, ruta_csv: str):
-        self.ruta_csv = ruta_csv
+    # 3. Métodos modificados
+    def __init__(self):
+        # self.ruta_csv = ruta_csv  <-- ELIMINADO
         self.actividades: Dict[str, Actividad] = {}
-        self._cargar_desde_csv(ruta_csv)
+        self._cargar_datos() # <-- Modificado
 
-    def _cargar_desde_csv(self, ruta_csv: str):
-        with open(ruta_csv, newline='', encoding='utf-8') as f:
-            reader = csv.DictReader(f)
-            for row in reader:
-                nombre = row.get("nombre") or row.get("actividad")
-                fecha = row.get("dia") or row.get("fecha")
-                hora = row.get("horario") or row.get("hora")
-                cupo_str = row.get("cupo_disponible") or row.get("cupo") or "0"
-                try:
-                    cupo = int(cupo_str)
-                except Exception:
-                    cupo = 0
-                requiere_talle = str(row.get("requiere_talle", "False")).strip().lower() == "true"
-                visitantes_field = row.get("visitantes", "")
+    def _cargar_datos(self):
+        # Usamos io.StringIO para leer la constante como un archivo
+        f = io.StringIO(DATOS_CSV_HARDCODEADOS)
+        reader = csv.DictReader(f)
+        for row in reader:
+            nombre = row.get("nombre") or row.get("actividad")
+            fecha = row.get("dia") or row.get("fecha")
+            hora = row.get("horario") or row.get("hora")
+            cupo_str = row.get("cupo_disponible") or row.get("cupo") or "0"
+            try:
+                cupo = int(cupo_str)
+            except Exception:
+                cupo = 0
+            requiere_talle = str(row.get("requiere_talle", "False")).strip().lower() == "true"
+            visitantes_field = row.get("visitantes", "")
 
-                if nombre not in self.actividades:
-                    self.actividades[nombre] = Actividad(nombre, requiere_talle)
+            if nombre not in self.actividades:
+                self.actividades[nombre] = Actividad(nombre, requiere_talle)
 
-                actividad = self.actividades[nombre]
-                actividad.agregar_horario(fecha, hora, cupo)
+            actividad = self.actividades[nombre]
+            actividad.agregar_horario(fecha, hora, cupo)
 
-                if visitantes_field:
-                    dnis = [s for s in visitantes_field.split(";") if s.strip()]
-                    for dni in dnis:
-                        v = Visitante(nombre="", dni=dni, edad=0, talle=None)
-                        actividad.inscriptos[fecha][hora].append(v)
+            if visitantes_field:
+                dnis = [s for s in visitantes_field.split(";") if s.strip()]
+                for dni in dnis:
+                    # Creamos un visitante "placeholder" solo con DNI para la carga inicial
+                    v = Visitante(nombre="", dni=dni, edad=0, talle=None)
+                    actividad.inscriptos[fecha][hora].append(v)
 
     def buscar_actividad(self, nombre: str) -> Optional[Actividad]:
         return self.actividades.get(nombre)
@@ -157,34 +596,10 @@ class GestorActividades:
         actividad = self.buscar_actividad(actividad_nombre)
         if actividad is None or not acepto_terminos:
             return False
-
-        # Revisar que haya cupo suficiente
-        # if not actividad.hay_cupo(dia, horario, len(visitantes)):
-        #     return False
-
-        # Validar cada visitante usando su método es_valido, que ya maneja talle según la actividad
-        # for v in visitantes:
-        #     if not v.es_valido(actividad.requiere_talle):
-        #         return False
-
-        # Si todo está bien, agregamos los visitantes
+        
+        # Las validaciones ya están en agregar_visitantes
         return actividad.agregar_visitantes(dia, horario, visitantes)
 
-
-    def guardar_actividades_csv(self, ruta_salida: Optional[str] = None):
-        path = ruta_salida or self.ruta_csv
-        fieldnames = ["nombre", "dia", "horario", "cupo_disponible", "requiere_talle", "visitantes"]
-        rows: List[Dict[str, str]] = []
-        for actividad in self.actividades.values():
-            rows.extend(actividad.to_csv_rows())
-
-        with open(path, "w", newline="", encoding="utf-8") as f:
-            writer = csv.DictWriter(f, fieldnames=fieldnames)
-            writer.writeheader()
-            for r in rows:
-                writer.writerow(r)
-
-    # ----------- Métodos nuevos para API -----------
 
     def obtener_tipos_actividades(self) -> List[Dict]:
         """Devuelve lista de actividades con info básica (para frontend)."""
