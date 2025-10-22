@@ -125,7 +125,7 @@ function InscribirVisitantes({ actividad, dia, horario, cantidad, onVolver, onEx
                             onChange={e => setAceptoTerminos(e.target.checked)}
                         />
                         <label className="form-check-label" htmlFor="terminosCheck">
-                            Acepto<a href="..\..\public\TerminosYCondiciones.pdf"> términos y condiciones</a>
+                            Acepto<a href="..\..\public\TerminosYCondiciones.pdf" target="_blank"> términos y condiciones</a>
                         </label>
                     </div>
 
