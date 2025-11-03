@@ -68,7 +68,7 @@ Este es el repositorio del grupo 14, de la materia Ingenieria y Calidad de Softw
   - TP12/
   - TP13/
   - TP14/
-    - TP14 Salida.pdf
+    - TP14_Salida.pdf
 
 
 ---
