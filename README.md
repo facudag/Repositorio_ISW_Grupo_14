@@ -80,7 +80,7 @@ Este es el repositorio del grupo 14, de la materia Ingenieria y Calidad de Softw
 | README.md                   | `README.md`                                | `/`                                | Proyecto             |
 | Diapositivas                | `<nn><Nombre_Diapositiva>.<extensión>`    | `/Material_Teorico/Diapositivas/`  | Documentación       |
 | Bibliografia                | `<Tema>_<Nombre Documento>.<extensión>`    | `/Material_Teorico/Bibliografia/`  | Documentación       |
-| Apuntes                     | `<Nombre Apunte>.<extensión>`              | `/Material_Teorico/Apuntes/`       | Documentación       |
+| Apuntes                     | `<Fecha>_<Nombre Documento>.<extension>`   | `/Material_Teorico/Apuntes/`       | Documentación       |
 | ISW_Enunciados TP evaluables 2025 | `ISW_Enunciados TP evaluables 2025.pdf` | `/Trabajos_Practicos/`             | Proyecto       |
 | TP1                         | `TP<n> <NombreArchivo>.<extensión>`          | `/Trabajos_Practicos/TP1/`         | Producto          |
 
