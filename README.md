@@ -58,7 +58,17 @@ Este es el repositorio del grupo 14, de la materia Ingenieria y Calidad de Softw
   - TP2/
   - TP3/
   - TP4/
-    - TP4 Salida.pdf
+  - TP5/
+  - TP6/
+  - TP7/
+  - TP8/
+  - TP9/
+  - TP10/
+  - TP11/
+  - TP12/
+  - TP13/
+  - TP14/
+    - TP14 Salida.pdf
 
 
 ---
@@ -69,7 +79,7 @@ Este es el repositorio del grupo 14, de la materia Ingenieria y Calidad de Softw
 - Los archivos dentro de las carpetas `TP<NumeroTP>` deben usar la convencion `TP<n>_<NombreArchivo>.<extensión>`
 - Las diapositivas se deben guardar con el formato `<nn><nombre de la diapositiva>.<pdf>` ejemplo: 01 SCM.pdf
 - La bibliografia se debe guardar con el siguiente formato `<Tema>_<Nombre Documento>.<pdf>`
-- Los apuntes se deben guardar con el siguiente formato `<Fecha>_<Nombre Documento>.<pdf>`
+- Los apuntes se deben guardar con el siguiente formato `<Fecha>_<Nombre Apunte>.<pdf>`
 
 ---
 
@@ -82,7 +92,7 @@ Este es el repositorio del grupo 14, de la materia Ingenieria y Calidad de Softw
 | Bibliografia                | `<Tema>_<Nombre Documento>.<pdf>`    | `/Material_Teorico/Bibliografia/`  | Documentación       |
 | Apuntes                     | `<Fecha>_<Nombre Apunte>.<pdf>`   | `/Material_Teorico/Apuntes/`       | Documentación       |
 | ISW_Enunciados TP evaluables 2025 | `ISW_Enunciados TP evaluables 2025.pdf` | `/Trabajos_Practicos/`             | Proyecto       |
-| TP*                         | `TP<n>_<NombreArchivo>.<extensión>(.pdf, .xlsx)` | `/Trabajos_Practicos/TP*/`         | Producto          |
+| TP*                         | `TP<n>_<NombreArchivo>.<extensión> (.pdf, .xlsx)` | `/Trabajos_Practicos/TP*/`         | Producto          |
 
 
 ---
