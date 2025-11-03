@@ -62,14 +62,14 @@ Este es el repositorio del grupo 14, de la materia Ingenieria y Calidad de Softw
 
 
 ---
-## Convenciones y Reglas de Nombrado
+## Convenciones
 
 - Los trabajos practicos se guardan en carpetas con el formato `TP<NumeroTP>` Ejemplo: 'TP1'
 - Dentro de las carpetas de Trabajos practicos encontraremos las salidas de los mismos, junto a los items de configuracion necesarios.
-- Los archivos dentro de las carpetas `TP<NumeroTP>` deben usar la convencion `TP<NumeroTP><descripcion>.<extension>`
-- Las diapositivas se deben guardar con el formato `<nn><nombre de la diapositiva>.<extension>` ejemplo: 01 SCM.pdf
-- La bibliografia se debe guardar con el siguiente formato `<Tema>_<Nombre Documento>.<extension>`
-- Los apuntes se deben guardar con el siguiente formato `<Fecha>_<Nombre Documento>.<extension>`
+- Los archivos dentro de las carpetas `TP<NumeroTP>` deben usar la convencion `TP<n>_<NombreArchivo>.<extensión>`
+- Las diapositivas se deben guardar con el formato `<nn><nombre de la diapositiva>.<pdf>` ejemplo: 01 SCM.pdf
+- La bibliografia se debe guardar con el siguiente formato `<Tema>_<Nombre Documento>.<pdf>`
+- Los apuntes se deben guardar con el siguiente formato `<Fecha>_<Nombre Documento>.<pdf>`
 
 ---
 
@@ -78,11 +78,11 @@ Este es el repositorio del grupo 14, de la materia Ingenieria y Calidad de Softw
 | Ítem de Configuración       | Regla de Nombrado                          | Ubicación Física                   | Tipo de Ítem              |
 |-----------------------------|--------------------------------------------|------------------------------------|---------------------------|
 | README.md                   | `README.md`                                | `/`                                | Proyecto             |
-| Diapositivas                | `<nn><Nombre_Diapositiva>.<extensión>`    | `/Material_Teorico/Diapositivas/`  | Documentación       |
-| Bibliografia                | `<Tema>_<Nombre Documento>.<extensión>`    | `/Material_Teorico/Bibliografia/`  | Documentación       |
-| Apuntes                     | `<Fecha>_<Nombre Documento>.<extension>`   | `/Material_Teorico/Apuntes/`       | Documentación       |
+| Diapositivas                | `<nn><Nombre_Diapositiva>.<pdf>`    | `/Material_Teorico/Diapositivas/`  | Documentación       |
+| Bibliografia                | `<Tema>_<Nombre Documento>.<pdf>`    | `/Material_Teorico/Bibliografia/`  | Documentación       |
+| Apuntes                     | `<Fecha>_<Nombre Apunte>.<pdf>`   | `/Material_Teorico/Apuntes/`       | Documentación       |
 | ISW_Enunciados TP evaluables 2025 | `ISW_Enunciados TP evaluables 2025.pdf` | `/Trabajos_Practicos/`             | Proyecto       |
-| TP1                         | `TP<n> <NombreArchivo>.<extensión>`          | `/Trabajos_Practicos/TP1/`         | Producto          |
+| TP*                         | `TP<n>_<NombreArchivo>.<extensión>(.pdf, .xlsx)` | `/Trabajos_Practicos/TP*/`         | Producto          |
 
 
 ---
