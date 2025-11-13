@@ -76,7 +76,7 @@ Este es el repositorio del grupo 14, de la materia Ingenieria y Calidad de Softw
 
 - Los trabajos practicos se guardan en carpetas con el formato `TP*` Ejemplo: 'TP1'. Se utiliza el carácter comodín * en la denominación TP* para representar un ítem de configuración genérico que agrupa a todos los trabajos prácticos (TP1, TP2, TP3, etc.).
 - Dentro de las carpetas de Trabajos practicos encontraremos las salidas de los mismos, junto a los items de configuracion necesarios.
-- Los archivos dentro de las carpetas `TP*` deben usar la convencion `TP<n>_<NombreArchivo>.<extensión>`
+- Los archivos dentro de las carpetas `TP*` deben usar la convencion `TP<n>_<NombreArchivo>.<extensión>`. Si el nombre del archivo requiere más de una palabra, se utilizará guion bajo (_) como separador en lugar de los espacios.
 - Las diapositivas se deben guardar con el formato `<nn>_<NombreDiapositiva>.<pdf>` ejemplo: 01_SCM.pdf. Si el nombre de la diapositiva requiere más de una palabra, se utilizará guion bajo (_) como separador en lugar de los espacios.
 - La bibliografia se debe guardar con el siguiente formato `<Tema>_<NombreDocumento>.<pdf>`. El tema se escribe sin espacios ni caracteres especiales. En caso de requerir más de una palabra en el nombre del documento, se utilizará guion bajo (_) como separador.
 - Los apuntes se deben guardar con el siguiente formato `<Fecha>_<NombreApunte>.<pdf>`. Si el nombre del apunte requiere más de una palabra, se utilizará guion bajo (_) como separador en lugar de los espacios. La fecha se expresará en formato ISO 8601 (AAAA-MM-DD). Este formato permite un orden cronológico correcto y facilita la búsqueda.
@@ -115,6 +115,7 @@ Las líneas base se etiquetarán en el repositorio con la siguiente convención:
 - `<Tema>` se basará en el contenido central del documento subido (por ejemplo: TDD, Nexus, Kanban, Paper, etc).
 - `<NombreDocumento>` título descriptivo del archivo, según su contenido.
 - `<NombreDiapositiva>` indica el tema principal de la filmina.
+- `<NombreArchivo>` hace referencia al archivo de salida principal del TP, o a un nombre representativo del contenido del entregable.
 
 
 
